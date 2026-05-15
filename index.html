@@ -1368,6 +1368,40 @@
         .music-button.is-paused {
           opacity: 0.55;
         }
+
+		/* =========================================================
+			MARCA / LOGO DE LA PLANTILLA
+			Firma sutil al final de la invitación.
+			========================================================= */
+			.template-brand {
+			margin: 20px auto 0;
+			padding-top: 14px;
+			width: fit-content;
+			max-width: 220px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 8px;
+			opacity: 0.82;
+			border-top: 1px solid rgba(45, 45, 42, 0.12);
+			}
+
+			.template-brand span {
+			font-size: 0.56rem;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+			color: rgba(45, 45, 42, 0.56);
+			font-weight: 700;
+			}
+
+			.template-brand img {
+			width: 110px;
+			max-height: 46px;
+			object-fit: contain;
+			display: block;
+
+			filter: brightness(0) saturate(100%) invert(27%) sepia(32%) saturate(1014%) hue-rotate(82deg) brightness(88%) contrast(89%);
+			}
         		
         		    @keyframes rosePetalFall {
         		      0% { transform: translate3d(0, -22px, 0) rotate(0deg); opacity: 0.68; }
@@ -1778,8 +1812,11 @@
                     </section>
 
                     <footer class="footer">
-                        Con cariño,
-                        <br /> Camila & Daniel · 2026
+						<!-- MARCA PARAMETRIZABLE DE LA PLANTILLA -->
+							<div class="template-brand">
+							<span>Invitación digital por</span>
+							<img src="img/logoencanto.png" alt="Marca de la plantilla">
+						</div>
                     </footer>
                 </section>
         </div>
