@@ -142,19 +142,49 @@
 		       en .opening-screen.
 		       ========================================================= */
 		    .opening-screen {
-		      position: absolute;
-		      inset: 0;
-		      z-index: 20;
-		      display: flex;
-		      justify-content: center;
-		      align-items: flex-start;
-		      padding: clamp(38px, 7svh, 72px) 24px 28px;
-		      background:
-		        radial-gradient(circle at top, rgba(255, 255, 255, 0.88), transparent 38%),
-		        radial-gradient(circle at bottom right, rgba(127, 155, 127, 0.2), transparent 44%),
-		        linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(236, 233, 223, 0.98));
-		      transition: opacity 0.85s ease, visibility 0.85s ease;
-		    }
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 28px 24px;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 50% 36%, rgba(255, 255, 255, 0.95), transparent 34%),
+    radial-gradient(circle at 18% 18%, rgba(127, 155, 127, 0.14), transparent 28%),
+    radial-gradient(circle at 84% 78%, rgba(154, 142, 127, 0.13), transparent 30%),
+    linear-gradient(145deg, #ffffff 0%, #f7f5ee 52%, #e7e3d8 100%);
+
+  transition: opacity 0.85s ease, visibility 0.85s ease;
+}
+.opening-screen::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 36px;
+
+  background:
+    radial-gradient(circle, rgba(24, 92, 40, 0.08) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+
+  opacity: 0.28;
+  mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+}
+.opening-screen::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 36px;
+  border: 1px solid rgba(24, 92, 40, 0.12);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.72);
+}
 		
 		    .opening-screen.hide {
 		      opacity: 0;
@@ -171,17 +201,20 @@
 		    }
 		
 		    .opening-label {
-		      margin-bottom: 24px;
-		      font-size: 0.72rem;
-		      letter-spacing: 0.26em;
-		      text-transform: uppercase;
-		      color: var(--color-principal);
-		      font-weight: 800;
+		       margin-bottom: 8px;
+				display: grid;
+				gap: 4px;
+				font-size: 0.92rem;
+				line-height: 1.25;
+				letter-spacing: 0.18em;
+				text-transform: uppercase;
+				color: var(--color-principal);
+				font-weight: 800;
 		    }
 		
 		    .envelope-button {
 		      width: 100%;
-		      min-height: 285px;
+		      min-height: 185px;
 		      border: none;
 		      background: transparent;
 		      cursor: pointer;
@@ -194,6 +227,7 @@
 		      -webkit-tap-highlight-color: transparent;
 		      perspective: 1000px;
 		    }
+			
 		
 		    .envelope-button:focus-visible {
 		      outline: 3px solid rgba(24, 92, 40, 0.35);
@@ -1201,92 +1235,77 @@
 		
 		
 		        /* =========================================================
-		   POPUP DE UBICACIÓN
-		   Edita colores desde las variables principales en :root.
-		   ========================================================= */
-		      .map-modal {
-		      position: absolute;
-		      inset: 0;
-		      z-index: 40;
-		      display: none;
-		      justify-content: center;
-		      align-items: center;
-		      padding: 22px;
-		      background: rgba(45, 45, 42, 0.48);
-		      backdrop-filter: blur(10px);
-		      }
-		
-		      .map-modal.show {
-		      display: flex;
-		      }
-		
-		      .map-modal-content {
-		      position: relative;
-		      width: 100%;
-		      max-width: 360px;
-		      max-height: 88svh;
-		      overflow-y: auto;
-		      padding: 22px 18px 18px;
-		      border-radius: 28px;
-		      background:
-		        linear-gradient(rgba(247, 245, 238, 0.96), rgba(247, 245, 238, 0.98)),
-		        radial-gradient(circle at top right, rgba(127, 155, 127, 0.18), transparent 44%);
-		      border: 1px solid rgba(255, 255, 255, 0.78);
-		      box-shadow: 0 24px 60px rgba(45, 45, 42, 0.24);
-		      text-align: center;
-		      }
-		
-		      .map-modal-content h2 {
-		      font-family: "Cormorant Garamond", serif;
-		      font-size: 1.8rem;
-		      color: var(--color-texto);
-		      margin-bottom: 6px;
-		      }
-		
-		      .map-modal-content p {
-		      font-size: 0.84rem;
-		      line-height: 1.5;
-		      color: var(--color-texto-suave);
-		      margin-bottom: 14px;
-		      }
-		
-		      .map-modal-close {
-		      position: absolute;
-		      top: 12px;
-		      right: 12px;
-		      width: 34px;
-		      height: 34px;
-		      border: none;
-		      border-radius: 50%;
-		      background: rgba(255, 255, 255, 0.78);
-		      color: var(--color-principal);
-		      font-size: 1.45rem;
-		      line-height: 1;
-		      cursor: pointer;
-		      box-shadow: 0 8px 18px rgba(45, 45, 42, 0.12);
-		      }
-		
-		      .map-frame-wrapper {
-		      width: 100%;
-		      height: 310px;
-		      overflow: hidden;
-		      border-radius: 22px;
-		      border: 1px solid rgba(24, 92, 40, 0.16);
-		      box-shadow: 0 12px 26px rgba(45, 45, 42, 0.12);
-		      background: rgba(255, 255, 255, 0.7);
-		      }
-		
-		      .map-frame-wrapper iframe {
-		      width: 100%;
-		      height: 100%;
-		      border: 0;
-		      display: block;
-		      }
-		
-		      .map-open-link {
-		      margin-top: 14px;
-		      width: 100%;
-		      }
+   POPUP DE MAPA OPTIMIZADO PARA MÓVIL
+   El popup se centra en la pantalla visible del celular.
+   ========================================================= */
+.map-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 14px;
+  background: rgba(45, 45, 42, 0.56);
+  backdrop-filter: blur(10px);
+}
+
+.map-modal.show {
+  display: flex;
+}
+
+.map-modal-content {
+  position: relative;
+  width: min(100%, 390px);
+  height: min(88dvh, 720px);
+  padding: 46px 12px 14px;
+  border-radius: 28px;
+  background:
+    linear-gradient(rgba(247, 245, 238, 0.98), rgba(247, 245, 238, 0.99)),
+    radial-gradient(circle at top right, rgba(127, 155, 127, 0.18), transparent 44%);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow: 0 24px 70px rgba(45, 45, 42, 0.32);
+  overflow: hidden;
+}
+
+.map-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--color-principal);
+  font-size: 1.45rem;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 8px 18px rgba(45, 45, 42, 0.14);
+}
+
+.map-frame-wrapper {
+  width: 100%;
+  height: calc(100% - 62px);
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(24, 92, 40, 0.16);
+  box-shadow: 0 12px 26px rgba(45, 45, 42, 0.14);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.map-frame-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.map-open-link {
+  width: 100%;
+  margin-top: 12px;
+}
 
           /* =========================================================
    FLORES DECORATIVAS PARAMETRIZABLES
@@ -1408,7 +1427,10 @@
          ========================================================= -->
 		<section class="opening-screen" id="openingScreen">
 			<div class="opening-content">
-				<p class="opening-label">Tienes una invitación especial</p>
+				<p class="opening-label">
+				<span>Tienes una</span>
+				<span>invitación especial</span>
+				</p>
 
 				<button class="envelope-button" id="openInvitation" type="button" aria-label="Ver invitación de boda">
           <span class="envelope-card" aria-hidden="true">
@@ -1609,17 +1631,6 @@
 					</div>
 					<!-- Fin Ramas divisoras -->
 
-					<!-- SECCIÓN PARAMETRIZABLE: segunda foto o bloque visual -->
-					<section class="section photo-section">
-						<div class="photo-card">
-							<img src="img/undiapararecordar.png" alt="Foto especial de la boda" />
-							<div class="photo-message">
-								<h2>Un día para recordar</h2>
-								<p>Queremos vivir este momento contigo y guardar cada sonrisa como parte de nuestra historia.</p>
-							</div>
-						</div>
-					</section>
-
 					<!-- SECCIÓN PARAMETRIZABLE: contador regresivo -->
 					<section class="section countdown-section">
 						<h2> ¡Se acerca el gran día!</h2>
@@ -1631,6 +1642,17 @@
 							<div><strong id="seconds">00</strong><span>Seg</span></div>
 						</div>
 					</section>
+
+					<!-- SECCIÓN PARAMETRIZABLE: segunda foto o bloque visual -->
+					<section class="section photo-section">
+						<div class="photo-card">
+							<img src="img/undiapararecordar.png" alt="Foto especial de la boda" />
+							<div class="photo-message">
+								<h2>Un día para recordar</h2>
+								<p>Queremos vivir este momento contigo y guardar cada sonrisa como parte de nuestra historia.</p>
+							</div>
+						</div>
+					</section>					
 
 					<!-- SECCIÓN PARAMETRIZABLE: código de vestimenta -->
 					<section class="section">
@@ -1723,17 +1745,14 @@
 					</footer>
 				</section>
 		</div>
+	</main>
 
-		<!-- POPUP PARAMETRIZABLE: ubicación en Google Maps -->
+	<!-- POPUP PARAMETRIZABLE: ubicación en Google Maps -->
 		<div class="map-modal" id="mapModal" aria-hidden="true">
 			<div class="map-modal-content">
 				<button class="map-modal-close" id="closeMapModal" type="button" aria-label="Cerrar mapa">
           ×
         </button>
-
-				<h2>Ubicación de la ceremonia</h2>
-				<p id="mapAddressText">Iglesia / Hacienda Los Olivos</p>
-
 				<div class="map-frame-wrapper">
 					<iframe id="mapIframe" src="" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
           </iframe>
@@ -1744,8 +1763,6 @@
         </a>
 			</div>
 		</div>
-
-	</main>
 
 	<script>
 		const openingScreen = document.getElementById("openingScreen");
@@ -1805,18 +1822,22 @@
 		
 		  mapIframe.src = embedUrl;
 		  openGoogleMaps.href = externalUrl;
-		  mapAddressText.textContent = addressText;
+		  if (mapAddressText) {
+			mapAddressText.textContent = addressText;
+			}
 		}
 		
 		function showMapModal() {
-		  buildMapLinks();
-		  mapModal.classList.add("show");
-		  mapModal.setAttribute("aria-hidden", "false");
+		buildMapLinks();
+		mapModal.classList.add("show");
+		mapModal.setAttribute("aria-hidden", "false");
+		document.body.style.overflow = "hidden";
 		}
 		
 		function hideMapModal() {
-		  mapModal.classList.remove("show");
-		  mapModal.setAttribute("aria-hidden", "true");
+		mapModal.classList.remove("show");
+		mapModal.setAttribute("aria-hidden", "true");
+		document.body.style.overflow = "";
 		}
 		
 		if (openMapModal) {
