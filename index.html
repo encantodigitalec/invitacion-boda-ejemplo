@@ -1481,6 +1481,146 @@
         		        letter-spacing: 0.08em;
         		      }
         		    }
+
+					.hero-rings-icon {
+  animation: floatRing 3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+/* Animación */
+@keyframes floatRing {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+h1 {
+  animation: zoomIn 8.6s ease-out both;
+}
+
+@keyframes zoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.date-card {
+  animation: cardFloat 4s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.photo-section {
+    position: relative;
+	border-radius: 10px !important;
+}
+
+.photo-section::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        linear-gradient(to top,
+            rgba(255,255,255,1) 0%,
+            rgba(255,255,255,0) 15%,
+            rgba(255,255,255,0) 85%,
+            rgba(255,255,255,1) 100%);
+}
+.photo-section img {
+    transition: transform .6s ease;
+}
+
+.photo-section:hover img {
+    transform: scale(1.03);
+}
+.photo-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 1s ease,
+        transform 1s ease;
+}
+
+.photo-section.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero p {
+    opacity: 0;
+    animation: fadeText 8s ease forwards;
+    animation-delay: 0.8s;
+}
+
+@keyframes fadeText {
+    to {
+        opacity: 10;
+    }
+}
+
+.event-large-card {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 14px;
+    align-items: center;
+    text-align: left;
+    padding: 16px;
+    border-radius: 24px;
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.76),
+        rgba(247, 245, 238, 0.68)
+    );
+    border: 1px solid rgba(24, 92, 40, 0.16);
+
+    box-shadow: 0 12px 26px rgba(45, 45, 42, 0.08);
+
+    animation: floatingCard 5s ease-in-out infinite;
+}
+
+@keyframes floatingCard {
+    0% {
+        transform: translateY(0);
+        box-shadow: 0 12px 26px rgba(45,45,42,.08);
+    }
+
+    50% {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 40px rgba(45,45,42,.15);
+    }
+
+    100% {
+        transform: translateY(0);
+        box-shadow: 0 12px 26px rgba(45,45,42,.08);
+    }
+}
+
+
+
+
     </style>
 </head>
 
@@ -1521,8 +1661,8 @@
         </section>
 
         <div class="invitation-wrapper" id="invitationWrapper">
-
-            <button class="music-button" id="musicButton" type="button" aria-label="Pausar o reproducir música">♪</button>
+			
+            <button class="music-button" id="musicButton" type="button" aria-label="Pausar o reproducir música">❚❚</button>
 
             <!-- FLORES DECORATIVAS PARAMETRIZABLES -->
             <img class="corner-flower flower-top-left" src="img/flores-arriba.png" alt="" aria-hidden="true">
@@ -1876,11 +2016,11 @@
           if (weddingAudio.paused) {
             weddingAudio.play();
             musicButton.classList.remove("is-paused");
-            musicButton.textContent = "♪";
+            musicButton.textContent = "❚❚";
           } else {
             weddingAudio.pause();
             musicButton.classList.add("is-paused");
-            musicButton.textContent = "×";
+            musicButton.textContent = "▶";
           }
         }
         
@@ -2009,6 +2149,20 @@
         		
         		    updateCountdown();
         		    setInterval(updateCountdown, 1000);
+
+					const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+}, {
+  threshold: 0.2
+});
+
+document
+  .querySelectorAll(".photo-section")
+  .forEach(el => observer.observe(el));
     </script>
 </body>
 
